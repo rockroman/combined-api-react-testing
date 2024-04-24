@@ -34,7 +34,7 @@ REST_FRAMEWORK = {
     )],
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 15,
     'DATETIME_FORMAT': '%d %b %Y',
 }
 if 'DEV' not in os.environ:
@@ -59,9 +59,11 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+# DEBUG = 'DEV' in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     os.environ.get('ALLOWED_HOST'),
     'localhost',
 ]
@@ -146,12 +148,10 @@ WSGI_APPLICATION = 'drf_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': ({
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    } if 'DEV' in os.environ else dj_database_url.parse(
-        os.environ.get('DATABASE_URL')
-    ))
+    }
 }
 
 
